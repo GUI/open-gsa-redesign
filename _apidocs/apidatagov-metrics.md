@@ -96,49 +96,22 @@ To begin using this API, you will need to register for an API Key. You can sign 
 | ---- | ----------- |
 | x-api-key | API key from api.data.gov.  For sample purposes, you can use `DEMO_KEY` as an API key. |
 
+<p><small><a href="#">Back to top</a></small></p>
 
+## OpenAPI Specification File
 
+You can view the full details of this API in the OpenAPI Specification file available here:
+<a href="v0/openapi.yaml">Open API specification file for the Api.Data.Gov Metrics API</a>
 
-## API Description
-
-This API has one primary endpoints:
-
-**Endpoint 1:** https://api.gsa.gov/operations/api-data-gov/v0/analytics/summary.json
-
-**Expected Result**
-
-#### Overall
-
-| Name  | Description |
-| ---- | ----------- |
-| total_hits | Number of API hits processed by the api.data.gov system over all time |
-| total_users | Number of API keys that accessed APIs through the api.data.gov system over all time |
-
-
-#### Hits by Month
-
-| Name  | Description |
-| ---- | ----------- |
-| year | Year in which the results took place |
-| month | Month in which the results took place |
-| count |  Number of API hits processed by the api.data.gov system in that month and year |
-
-
-#### Production APIs
-
-| Name  | Description |
-| ---- | ----------- |
-| api_backend_count | Year in which the results took place |
-| organization_count | Month in which the results took place |
-| api_backend_url_match_count |  Number of API hits processed by the api.data.gov system in that month and year |
-
+<p><small><a href="#">Back to top</a></small></p>
 
 ## API Calls
-
 
 {% include swagger-section-header.html %}
     url: "v0/openapi.yaml",
 {% include swagger-section-footer.html %}
+
+<p><small><a href="#">Back to top</a></small></p>
 
 ## Contact Us
 
