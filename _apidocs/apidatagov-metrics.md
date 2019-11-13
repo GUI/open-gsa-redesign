@@ -133,6 +133,12 @@ This API has one primary endpoints:
 | api_backend_url_match_count |  Number of API hits processed by the api.data.gov system in that month and year |
 
 
+## API Calls
+
+
+{% include swagger-section-header.html %}
+    url: "v0/openapi.yaml",
+{% include swagger-section-footer.html %}
 
 ## Contact Us
 
