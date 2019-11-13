@@ -1,4 +1,7 @@
 openapi: "3.0.0"
+info:
+  title: Api.Data.Gov Metrics API
+  version: "0.1"
 security:
   - ApiKeyQueryAuth: []
   - ApiKeyHeaderAuth: []
@@ -56,74 +59,7 @@ components:
               items:
                 $ref: "#/components/schemas/AnalyticsSummaryOrganization"
             all:
-              type: object
-              properties:
-                active_api_keys:
-                  type: object
-                  properties:
-                    monthly:
-                      type: array
-                      items:
-                        type: array
-                        items:
-                          type: string
-                    recent:
-                      type: object
-                      properties:
-                        total:
-                          type: integer
-                        daily:
-                          type: array
-                          items:
-                            type: array
-                            items:
-                              type: string
-                    total:
-                      type: integer
-                average_response_times:
-                  type: object
-                  properties:
-                    average:
-                      type: integer
-                    monthly:
-                      type: array
-                      items:
-                        type: array
-                        items:
-                          type: string
-                    recent:
-                      type: object
-                      properties:
-                        average:
-                          type: integer
-                        daily:
-                          type: array
-                          items:
-                            type: array
-                            items:
-                              type: string
-                hits:
-                  type: object
-                  properties:
-                    monthly:
-                      type: array
-                      items:
-                        type: array
-                        items:
-                          type: string
-                    recent:
-                      type: object
-                      properties:
-                        total:
-                          type: integer
-                        daily:
-                          type: array
-                          items:
-                            type: array
-                            items:
-                              type: string
-                    total:
-                      type: integer
+              $ref: "#/components/schemas/AnalyticsSummaryMetrics"
         cached_at:
           type: string
           format: date-time
@@ -131,8 +67,10 @@ components:
         # TODO: Remove; unused legacy fields.
         total_hits:
           type: number
+          description: "TODO: Remove"
         hits_by_month:
           type: array
+          description: "TODO: Remove"
           items:
             type: object
             properties:
@@ -144,8 +82,10 @@ components:
                 type: number
         total_users:
           type: number
+          description: "TODO: Remove"
         users_by_month:
           type: array
+          description: "TODO: Remove"
           items:
             type: object
             properties:
@@ -170,12 +110,16 @@ components:
               description: The number of unique API keys used each month.
               items:
                 type: array
+                description: A 2 element array, with the first element being the month, and the second element being the count.
                 items:
                   oneOf:
                     - type: string
                       description: The month in YYYY-MM format.
+                      pattern: '^\d{4}-\d{2}$'
+                      example: 2019-01
                     - type: integer
                       description: The number of API keys used this month.
+                      nullable: true
                 minItems: 2
                 maxItems: 2
             recent:
@@ -190,24 +134,39 @@ components:
                   description: The number of unique API keys used each day in the last 30 days.
                   items:
                     type: array
+                    description: A 2 element array, with the first element being the day, and the second element being the count.
                     items:
                       oneOf:
                         - type: string
+                          format: date
                           description: The day in YYYY-MM-DD format.
                         - type: integer
                           description: The number of API keys used this day.
+                          nullable: true
                     minItems: 2
                     maxItems: 2
         hits:
           type: object
           description: Metrics on the number of API hits.
           properties:
+            total:
+              type: integer
             monthly:
               type: array
               items:
                 type: array
+                description: A 2 element array, with the first element being the month, and the second element being the count.
                 items:
-                  type: string
+                  oneOf:
+                    - type: string
+                      description: The month in YYYY-MM format.
+                      pattern: '^\d{4}-\d{2}$'
+                      example: 2019-01
+                    - type: integer
+                      description: The number of API hits during this month.
+                      nullable: true
+                minItems: 2
+                maxItems: 2
             recent:
               type: object
               properties:
@@ -215,35 +174,63 @@ components:
                   type: array
                   items:
                     type: array
+                    description: A 2 element array, with the first element being the day, and the second element being the count.
                     items:
-                      type: string
+                      oneOf:
+                        - type: string
+                          format: date
+                          description: The day in YYYY-MM-DD format.
+                        - type: integer
+                          description: The number of API hits during this day.
+                          nullable: true
+                    minItems: 2
+                    maxItems: 2
                 total:
                   type: integer
-            total:
-              type: integer
         average_response_times:
           type: object
           description: Metrics on the average response times of the APIs.
           properties:
             average:
               type: integer
+              nullable: true
             monthly:
               type: array
               items:
                 type: array
+                description: A 2 element array, with the first element being the month, and the second element being the average.
                 items:
-                  type: string
+                  oneOf:
+                    - type: string
+                      description: The month in YYYY-MM format.
+                      pattern: '^\d{4}-\d{2}$'
+                      example: 2019-01
+                    - type: integer
+                      description: The average response time of API hits during this month.
+                      nullable: true
+                minItems: 2
+                maxItems: 2
             recent:
               type: object
               properties:
                 average:
-                  type: string
+                  type: integer
+                  nullable: true
                 daily:
                   type: array
                   items:
                     type: array
+                    description: A 2 element array, with the first element being the day, and the second element being the average.
                     items:
-                      type: string
+                      oneOf:
+                        - type: string
+                          format: date
+                          description: The day in YYYY-MM-DD format.
+                        - type: integer
+                          description: The average response time of API hits during this day.
+                          nullable: true
+                    minItems: 2
+                    maxItems: 2
     AnalyticsSummaryOrganization:
       allOf:
         - type: object
