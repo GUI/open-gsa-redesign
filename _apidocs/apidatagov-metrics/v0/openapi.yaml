@@ -41,6 +41,9 @@ components:
           type: string
           format: date-time
           description: Timestamp of when the analytics data ends.
+        timezone:
+          type: string
+          description: The timezone of dates and times in the analytics data.
         production_apis:
           type: object
           description: Analytics data for all production APIs.
@@ -64,37 +67,6 @@ components:
           type: string
           format: date-time
           description: Timestamp of when the analytics summary data was generated and cached.
-        # TODO: Remove; unused legacy fields.
-        total_hits:
-          type: number
-          description: "TODO: Remove"
-        hits_by_month:
-          type: array
-          description: "TODO: Remove"
-          items:
-            type: object
-            properties:
-              year:
-                type: number
-              count:
-                type: number
-              month:
-                type: number
-        total_users:
-          type: number
-          description: "TODO: Remove"
-        users_by_month:
-          type: array
-          description: "TODO: Remove"
-          items:
-            type: object
-            properties:
-              count:
-                type: number
-              year:
-                type: number
-              month:
-                type: number
     AnalyticsSummaryMetrics:
       type: object
       properties:
